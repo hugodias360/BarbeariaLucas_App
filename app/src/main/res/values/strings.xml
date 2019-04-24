@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Barber Shop App</string>
+    <string name="app_name">Barbearia Lucas</string>
     <string name="mensagem_login">Faça seu Login</string>
 
     <string name="action_buscar">Buscar</string>
@@ -7,4 +7,7 @@
     <string name="action_adicionar">Adicionar</string>
     <string name="action_config">Configurações</string>
 
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="host">http://192.168.1.102:8000</string>
 </resources>

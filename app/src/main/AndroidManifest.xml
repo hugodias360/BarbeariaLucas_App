@@ -1,32 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.ope.mobile_ope">
+    package="br.com.checktec.barbeariaLucas">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="br.com.checktec.barbeariaLucas.Controladores.LoginActivity"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-                  android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DebugActivity" />
-        <activity android:name=".TelaInicialActivity"
-                  android:theme="@style/AppTheme.Toolbar"></activity>
-        <activity android:name=".SegundaTelaActivity"
-                  android:theme="@style/AppTheme.Toolbar"></activity>
-        <activity android:name=".TelaConfiguracaoActivity"
-                  android:theme="@style/AppTheme.Toolbar"></activity>
-        <activity android:name=".QuartaTelaActivity"
-                  android:theme="@style/AppTheme.Toolbar"></activity>
+        <activity android:name=".Controladores.ClienteListActivity"
+            android:theme="@style/AppTheme.Toolbar" >
+
+        </activity>
+        <activity android:name=".Controladores.ServicoListActivity"
+            android:theme="@style/AppTheme.Toolbar" >
+
+        </activity>
+        <activity android:name=".Controladores.ConfiguracoesActivity"
+            android:theme="@style/AppTheme.Toolbar" >
+
+        </activity>
+        <activity android:name="br.com.checktec.barbeariaLucas.Utils.DebugActivity" />
+        <activity
+            android:name="br.com.checktec.barbeariaLucas.Controladores.TelaInicialActivity"
+            android:theme="@style/AppTheme.Toolbar" />
+        <activity android:name="br.com.checktec.barbeariaLucas.Controladores.ClienteCadastroActivity"
+            android:theme="@style/AppTheme.Toolbar"
+            android:parentActivityName="br.com.checktec.barbeariaLucas.Controladores.ClienteListActivity"></activity>
+        <activity android:name="br.com.checktec.barbeariaLucas.Controladores.ServicoActivity"
+            android:theme="@style/AppTheme.Toolbar"
+            android:parentActivityName="br.com.checktec.barbeariaLucas.Controladores.TelaInicialActivity"></activity>
     </application>
 
 </manifest>

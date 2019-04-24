@@ -1,1 +1,0 @@
-# BarberShop_AppMobile

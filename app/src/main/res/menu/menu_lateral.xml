@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_agenda"
+            android:icon="@drawable/ic_agenda"
+            android:title="Agenda"
+            android:checked="true"/>
+
+        <item
+            android:id="@+id/nav_cabeleleiro"
+            android:icon="@drawable/ic_cabeleleiro"
+            android:title="Cabeleleiros" />
+
+        <item
+            android:id="@+id/nav_clientes"
+            android:icon="@drawable/ic_cliente"
+            android:title="Clientes" />
+
+        <item
+            android:id="@+id/nav_produtos"
+            android:icon="@drawable/ic_produto"
+            android:title="Produtos" />
+
+        <item
+            android:id="@+id/nav_servicos"
+            android:icon="@drawable/ic_servico"
+            android:title="Serviços" />
+        <item android:id="@+id/nav_sair"
+            android:icon="@drawable/ic_sair_black"
+            android:title="Sair" />
+    </group>
+</menu>
