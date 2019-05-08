@@ -10,6 +10,7 @@ import br.com.checktec.barbeariaLucas.Models.Cliente
 import br.com.checktec.barbeariaLucas.R
 
 class ClienteAdapter (
+
         val clientes: List<Cliente>,
         val onClick: (Cliente) -> Unit): RecyclerView.Adapter<ClienteAdapter.ClienteViewHolder>() {
 

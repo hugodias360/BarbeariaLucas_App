@@ -2,54 +2,51 @@ package br.com.checktec.barbeariaLucas.Service
 
 import android.content.Context
 import android.util.Log
-import br.com.checktec.barbeariaLucas.Models.Cliente
+import br.com.checktec.barbeariaLucas.Database.DatabaseManager
+import br.com.checktec.barbeariaLucas.Models.Produto
 import br.com.checktec.barbeariaLucas.Utils.AndroidUtils
 import br.com.checktec.barbeariaLucas.Utils.Host
 import br.com.checktec.barbeariaLucas.Utils.HttpHelper
-
-import android.widget.Toast
-import br.com.checktec.barbeariaLucas.Database.DatabaseManager
 import br.com.checktec.barbeariaLucas.Utils.Response
 import br.com.fernandosousa.lmsapp.BarberApplication
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-
-object ClienteService {
+object ProdutoService {
     val host = Host().host
     val TAG = "WS_LMSApp"
 
-    fun getCliente (context: Context): List<Cliente> {
-        var clientes = ArrayList<Cliente>()
+    fun getProduto (context: Context): List<Produto> {
+        var produtos = ArrayList<Produto>()
         if (AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/apicliente"
+            val url = "$host/apiproduto"
             val json = HttpHelper.get(url)
             Log.d(TAG, json)
-            clientes = parserJson(json)
-            for(c in clientes){
+            produtos = parserJson(json)
+            for(c in produtos){
                 saveOffline(c)
             }
-            return clientes
+            return produtos
         } else {
-            val dao = DatabaseManager.getClienteDAO()
-            val clientes = dao.findAll()
-            return clientes
+            val dao = DatabaseManager.getProdutoDAO()
+            val produtos = dao.findAll()
+            return produtos
         }
     }
-    fun save(cliente: Cliente): Response {
-        val json = HttpHelper.post("$host/apicliente/", cliente.toJson())
+    fun save(produto: Produto): Response {
+        val json = HttpHelper.post("$host/apiproduto/", produto.toJson())
         Log.d(TAG, json)
         return parserJson<Response>(json)
     }
 
-    fun delete(cliente: Cliente): Response {
+    fun delete(produto: Produto): Response {
         if (AndroidUtils.isInternetDisponivel(BarberApplication.getInstance().applicationContext)) {
-            val url = "$host/apicliente/${cliente.id}"
+            val url = "$host/apiproduto/${produto.id}"
             val json = HttpHelper.delete(url)
             return ServicoService.parserJson(json)
         } else {
-            val dao = DatabaseManager.getClienteDAO()
-            dao.delete(cliente)
+            val dao = DatabaseManager.getProdutoDAO()
+            dao.delete(produto)
             return Response(status = "OK", msg = "Dados salvos localmente")
         }
     }
@@ -59,16 +56,16 @@ object ClienteService {
         return Gson().fromJson<T>(json, type)
     }
 
-    fun saveOffline(cliente: Cliente) : Boolean {
-        val dao = DatabaseManager.getClienteDAO()
-        if (! existeCliente(cliente)) {
-            dao.insert(cliente)
+    fun saveOffline(produto: Produto) : Boolean {
+        val dao = DatabaseManager.getProdutoDAO()
+        if (! existeProduto(produto)) {
+            dao.insert(produto)
         }
         return true
     }
 
-    fun existeCliente(cliente: Cliente): Boolean {
-        val dao = DatabaseManager.getClienteDAO()
-        return dao.getById(cliente.id) != null
+    fun existeProduto(produto: Produto): Boolean {
+        val dao = DatabaseManager.getProdutoDAO()
+        return dao.getById(produto.id) != null
     }
 }

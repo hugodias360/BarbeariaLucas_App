@@ -12,30 +12,32 @@ import android.support.v7.widget.*
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import br.com.checktec.barbeariaLucas.Adapter.ServicoAdapter
-import br.com.checktec.barbeariaLucas.Models.Servico
+import br.com.checktec.barbeariaLucas.Adapter.ProdutoAdapter
+import br.com.checktec.barbeariaLucas.Models.Produto
+
+
 import br.com.checktec.barbeariaLucas.R
-import br.com.checktec.barbeariaLucas.Service.ServicoService
+import br.com.checktec.barbeariaLucas.Service.ProdutoService
 import br.com.checktec.barbeariaLucas.Utils.DebugActivity
 
-class ServicoListActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ProdutoListActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private val context: Context get() = this
-    private var servicos = listOf<Servico>()
-    var recyclerServicos: RecyclerView? = null
+    private var produtos = listOf<Produto>()
+    var recyclerProduto: RecyclerView? = null
     private var REQUEST_CADASTRO = 1
     private var REQUEST_REMOVE= 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_list_servico)
+        setContentView(R.layout.activity_list_produto)
 
         // colocar toolbar
         var toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         // alterar título da ActionBar
-        supportActionBar?.title = "Serviços"
+        supportActionBar?.title = "Produtos"
 
         // up navigation
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -43,39 +45,36 @@ class ServicoListActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         configuraMenuLateral()
 
         // configurar cardview
-        recyclerServicos = findViewById<RecyclerView>(R.id.recyclerServico)
-        recyclerServicos?.layoutManager = LinearLayoutManager(context)
-        recyclerServicos?.itemAnimator = DefaultItemAnimator()
-        recyclerServicos?.setHasFixedSize(true)
+        recyclerProduto = findViewById<RecyclerView>(R.id.recyclerProduto)
+        recyclerProduto?.layoutManager = LinearLayoutManager(context)
+        recyclerProduto?.itemAnimator = DefaultItemAnimator()
+        recyclerProduto?.setHasFixedSize(true)
 
     }
 
     override fun onResume() {
         super.onResume()
-        // task para recuperar as servicos
-        taskServico()
+        // task para recuperar as clientes
+        taskCliente()
     }
 
-    fun taskServico() {
+    fun taskCliente() {
         Thread {
-            // Código para procurar as servicos
+            // Código para procurar as clientes
             // que será executado em segundo plano / Thread separada
-            this.servicos = ServicoService.getServicos(context)
+            this.produtos = ProdutoService.getProduto(context)
             runOnUiThread {
-                // Código para atualizar a UI com a lista de servicos
-                recyclerServicos?.adapter =
-                        ServicoAdapter(servicos) { onClickServicos(it) }
+                // Código para atualizar a UI com a lista de clientes
+                recyclerProduto?.adapter =
+                        ProdutoAdapter(produtos) { onClickServicos(it) }
 
             }
         }.start()
     }
 
     // tratamento do evento de clicar em uma servico
-    fun onClickServicos(servico: Servico) {
-        Toast.makeText(context, "Clicou servico ${servico.nome}", Toast.LENGTH_SHORT).show()
-        val intent = Intent(context, ServicoActivity::class.java)
-        intent.putExtra("servico", servico)
-        startActivity(intent)
+    fun onClickServicos(produto: Produto) {
+        Toast.makeText(context, "Clicou servico ${produto.nome}", Toast.LENGTH_SHORT).show()
     }
 
     // configuraçao do navigation Drawer com a toolbar
@@ -174,10 +173,10 @@ class ServicoListActivity : DebugActivity(), NavigationView.OnNavigationItemSele
             Toast.makeText(context, "Botão de atualizar", Toast.LENGTH_LONG).show()
         } else if (id == R.id.action_config) {
             Toast.makeText(context, "Botão de configuracoes", Toast.LENGTH_LONG).show()
-        }else if (id == R.id.action_adicionar){
+        } else if (id == R.id.action_adicionar){
             Toast.makeText(context, "Botão de adicionar", Toast.LENGTH_LONG).show()
-            val intent = Intent(context, ServicoCadastroActivity::class.java)
-            startActivityForResult(intent, REQUEST_CADASTRO)
+            val intent = Intent(context, ProdutoCadastroActivity::class.java)
+            startActivity(intent)
         }
         // botão up navigation
         else if (id == android.R.id.home) {
@@ -185,6 +184,11 @@ class ServicoListActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         }
         return super.onOptionsItemSelected(item)
     }
-
-
+    // esperar o retorno do cadastro da disciplina
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == REQUEST_CADASTRO || requestCode == REQUEST_REMOVE ) {
+            // atualizar lista de disciplinas
+            taskCliente()
+        }
+    }
 }

@@ -2,54 +2,51 @@ package br.com.checktec.barbeariaLucas.Service
 
 import android.content.Context
 import android.util.Log
-import br.com.checktec.barbeariaLucas.Models.Cliente
+import br.com.checktec.barbeariaLucas.Database.DatabaseManager
+import br.com.checktec.barbeariaLucas.Models.Agenda
 import br.com.checktec.barbeariaLucas.Utils.AndroidUtils
 import br.com.checktec.barbeariaLucas.Utils.Host
 import br.com.checktec.barbeariaLucas.Utils.HttpHelper
-
-import android.widget.Toast
-import br.com.checktec.barbeariaLucas.Database.DatabaseManager
 import br.com.checktec.barbeariaLucas.Utils.Response
 import br.com.fernandosousa.lmsapp.BarberApplication
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-
-object ClienteService {
+object AgendaService {
     val host = Host().host
     val TAG = "WS_LMSApp"
 
-    fun getCliente (context: Context): List<Cliente> {
-        var clientes = ArrayList<Cliente>()
+    fun getAgenda (context: Context): List<Agenda> {
+        var agendas = ArrayList<Agenda>()
         if (AndroidUtils.isInternetDisponivel(context)) {
-            val url = "$host/apicliente"
+            val url = "$host/apiagendamento"
             val json = HttpHelper.get(url)
             Log.d(TAG, json)
-            clientes = parserJson(json)
-            for(c in clientes){
+            agendas = parserJson(json)
+            for(c in agendas){
                 saveOffline(c)
             }
-            return clientes
+            return agendas
         } else {
-            val dao = DatabaseManager.getClienteDAO()
-            val clientes = dao.findAll()
-            return clientes
+            val dao = DatabaseManager.getAgendaDAO()
+            val agendas = dao.findAll()
+            return agendas
         }
     }
-    fun save(cliente: Cliente): Response {
-        val json = HttpHelper.post("$host/apicliente/", cliente.toJson())
+    fun save(agenda: Agenda): Response {
+        val json = HttpHelper.post("$host/apiagendamento/", agenda.toJson())
         Log.d(TAG, json)
         return parserJson<Response>(json)
     }
 
-    fun delete(cliente: Cliente): Response {
+    fun delete(agenda: Agenda): Response {
         if (AndroidUtils.isInternetDisponivel(BarberApplication.getInstance().applicationContext)) {
-            val url = "$host/apicliente/${cliente.id}"
+            val url = "$host/apiagendamento/${agenda.id}"
             val json = HttpHelper.delete(url)
-            return ServicoService.parserJson(json)
+            return parserJson(json)
         } else {
-            val dao = DatabaseManager.getClienteDAO()
-            dao.delete(cliente)
+            val dao = DatabaseManager.getAgendaDAO()
+            dao.delete(agenda)
             return Response(status = "OK", msg = "Dados salvos localmente")
         }
     }
@@ -59,16 +56,16 @@ object ClienteService {
         return Gson().fromJson<T>(json, type)
     }
 
-    fun saveOffline(cliente: Cliente) : Boolean {
-        val dao = DatabaseManager.getClienteDAO()
-        if (! existeCliente(cliente)) {
-            dao.insert(cliente)
+    fun saveOffline(agenda: Agenda) : Boolean {
+        val dao = DatabaseManager.getAgendaDAO()
+        if (! existeAgenda(agenda)) {
+            dao.insert(agenda)
         }
         return true
     }
 
-    fun existeCliente(cliente: Cliente): Boolean {
-        val dao = DatabaseManager.getClienteDAO()
-        return dao.getById(cliente.id) != null
+    fun existeAgenda(agenda: Agenda): Boolean {
+        val dao = DatabaseManager.getAgendaDAO()
+        return dao.getById(agenda.id) != null
     }
 }

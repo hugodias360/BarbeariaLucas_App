@@ -102,22 +102,32 @@ class ClienteListActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         when (item.itemId) {
             R.id.nav_agenda -> {
                 Toast.makeText(this, "Clicou agenda", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, TelaInicialActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_cabeleleiro -> {
-                Toast.makeText(this, "Clicou servico", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Clicou cabeleleiro", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, CabeleleiroListActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_clientes -> {
                 Toast.makeText(this, "Clicou cliente", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, ClienteListActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_produtos -> {
                 Toast.makeText(this, "Clicou produto", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, ProdutoListActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_servicos -> {
                 Toast.makeText(this, "Clicou servico", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, ServicoListActivity::class.java)
+                startActivity(intent)
             }
         }
 

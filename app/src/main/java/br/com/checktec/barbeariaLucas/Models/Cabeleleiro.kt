@@ -5,14 +5,14 @@ import android.arch.persistence.room.PrimaryKey
 import com.google.gson.GsonBuilder
 import java.io.Serializable
 
-@Entity(tableName = "servico")
-class Servico : Serializable {
-
+@Entity(tableName = "cabeleleiro")
+class Cabeleleiro : Serializable {
     @PrimaryKey
     var id:Long = 0
+    var senha = ""
     var nome = ""
-    var valor = ""
-
+    var email = ""
+    var celular = ""
 
     override fun toString(): String {
         return "Servico(nome='$nome')"

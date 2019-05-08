@@ -10,6 +10,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:name="br.com.fernandosousa.lmsapp.BarberApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -29,9 +30,28 @@
             android:theme="@style/AppTheme.Toolbar" >
 
         </activity>
+        <activity android:name=".Controladores.ServicoCadastroActivity"
+            android:theme="@style/AppTheme.Toolbar" >
+
+        </activity>
+        <activity android:name=".Controladores.CabeleleiroListActivity"
+            android:theme="@style/AppTheme.Toolbar" >
+
+        </activity>
+        <activity android:name=".Controladores.ProdutoListActivity"
+            android:theme="@style/AppTheme.Toolbar" >
+
+        </activity>
         <activity android:name=".Controladores.ConfiguracoesActivity"
             android:theme="@style/AppTheme.Toolbar" >
 
+        </activity>
+        <activity android:name=".Controladores.ProdutoCadastroActivity"
+            android:theme="@style/AppTheme.Toolbar" >
+
+        </activity>
+        <activity android:name=".Controladores.CabeleleiroCadastroActivity"
+            android:theme="@style/AppTheme.Toolbar" >
         </activity>
         <activity android:name="br.com.checktec.barbeariaLucas.Utils.DebugActivity" />
         <activity

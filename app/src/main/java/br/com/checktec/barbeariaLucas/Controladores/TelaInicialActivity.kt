@@ -17,6 +17,7 @@ import br.com.checktec.barbeariaLucas.Models.Servico
 import br.com.checktec.barbeariaLucas.R
 import br.com.checktec.barbeariaLucas.Service.ServicoService
 import br.com.checktec.barbeariaLucas.Utils.DebugActivity
+import kotlinx.android.synthetic.main.activity_tela_inicial.*
 
 class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,6 +46,11 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
         configuraMenuLateral()
 
+        calendar?.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            val msg = "" +  dayOfMonth + "/" + (month + 1) + "/" + year
+            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+        }
+
 
     }
 
@@ -71,10 +77,14 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         when (item.itemId) {
             R.id.nav_agenda -> {
                 Toast.makeText(this, "Clicou agenda", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, TelaInicialActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_cabeleleiro -> {
-                Toast.makeText(this, "Clicou servico", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Clicou cabeleleiro", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, CabeleleiroListActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_clientes -> {
@@ -85,6 +95,8 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
 
             R.id.nav_produtos -> {
                 Toast.makeText(this, "Clicou produto", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, ProdutoListActivity::class.java)
+                startActivity(intent)
             }
 
             R.id.nav_servicos -> {
@@ -100,12 +112,6 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         return true
     }
 
-    fun cliqueSair() {
-        val returnIntent = Intent();
-        returnIntent.putExtra("result","Saída do BrewerApp");
-        setResult(Activity.RESULT_OK,returnIntent);
-        finish();
-    }
 
     // método sobrescrito para inflar o menu na Actionbar
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

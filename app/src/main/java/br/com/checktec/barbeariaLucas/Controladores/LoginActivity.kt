@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import br.com.checktec.barbeariaLucas.R
 import br.com.checktec.barbeariaLucas.Utils.DebugActivity
+import br.com.fernandosousa.lmsapp.Prefs
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : DebugActivity() {
@@ -25,6 +26,16 @@ class LoginActivity : DebugActivity() {
 
         val botaoLogin = findViewById<Button>(R.id.botao_login)
 
+        // procurar pelas preferências, se pediu para guardar usuário e senha
+        var lembrar = Prefs.getBoolean("lembrar")
+        if (lembrar) {
+            var lembrarNome = Prefs.getString("lembrarNome")
+            var lembrarSenha = Prefs.getString("lembrarSenha")
+            campo_usuario.setText(lembrarNome)
+            campo_senha.setText(lembrarSenha)
+            checkLembrar.isChecked = lembrar
+        }
+
         botaoLogin.setOnClickListener {onClickLogin() }
 
     }
@@ -35,6 +46,16 @@ class LoginActivity : DebugActivity() {
         val valorSenha = campo_senha.text.toString()
 
         if(valorUsuario == "aluno" && valorSenha == "impacta") {
+            // armazenar valor do checkbox
+            Prefs.setBoolean("lembrar", checkLembrar.isChecked)
+// verificar se é para lembrar nome e senha
+            if (checkLembrar.isChecked) {
+                Prefs.setString("lembrarNome", valorUsuario)
+                Prefs.setString("lembrarSenha", valorSenha)
+            } else {
+                Prefs.setString("lembrarNome", "")
+                Prefs.setString("lembrarSenha", "")
+            }
             // criar intent
             val intent = Intent(context, TelaInicialActivity::class.java)
             // colocar parâmetros (opcional)

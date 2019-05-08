@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <include layout="@layout/toolbar"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                    android:id="@+id/textViewNome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nome" />
+
+            <EditText
+                    android:id="@+id/edtNomeProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="Nome" />
+
+            <TextView
+                    android:id="@+id/textViewQuantidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Quantidade" />
+
+            <EditText
+                    android:id="@+id/edtQuantidadeProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:hint="Quantidade" />
+
+            <TextView
+                    android:id="@+id/textViewValor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Valor" />
+
+            <EditText
+                    android:id="@+id/edtValorProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="numberDecimal"/>
+
+            <TextView
+                    android:id="@+id/textViewValidade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Validade Produto" />
+
+            <com.vicmikhailau.maskededittext.MaskedEditText
+                    android:id="@+id/edtValidadeProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date"
+                    app:mask="@string/mask_date"
+                />
+
+            <TextView
+                    android:id="@+id/textViewEspe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Especificação" />
+
+            <EditText
+                    android:id="@+id/edtEspecificacaoProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="Especificação"/>
+
+            <Button
+                    android:id="@+id/btnSalvarProduto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Salvar" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

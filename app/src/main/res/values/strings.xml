@@ -9,5 +9,7 @@
 
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+    <string name="mask_telefone">#####-####</string>
+    <string name="mask_date">##/##/####</string>
     <string name="host">http://192.168.1.102:8000</string>
 </resources>
