@@ -6,10 +6,12 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "br.com.fernandosousa.barbeariaLucas"
+        applicationId "br.com.checktec.barbeariaLucas"
         minSdkVersion 23
         targetSdkVersion 27
         versionCode 1
@@ -52,4 +54,7 @@ dependencies {
 
     // Mascara EditText
     implementation 'com.vicmikhailau:MaskedEditText:2.0.4'
+
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.2'
 }

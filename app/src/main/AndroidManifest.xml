@@ -13,6 +13,11 @@
         android:name="br.com.fernandosousa.lmsapp.BarberApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service android:name="br.com.checktec.barbeariaLucas.Service.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <activity
             android:name="br.com.checktec.barbeariaLucas.Controladores.LoginActivity"
             android:theme="@style/AppTheme">

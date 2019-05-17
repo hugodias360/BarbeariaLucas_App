@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.*
 import br.com.checktec.barbeariaLucas.R
 import br.com.checktec.barbeariaLucas.Utils.DebugActivity
+import br.com.checktec.barbeariaLucas.Utils.NotificationUtil
 import br.com.fernandosousa.lmsapp.Prefs
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -23,6 +24,8 @@ class LoginActivity : DebugActivity() {
         val texto = findViewById<TextView>(R.id.texto_login)
         texto.text = getString(R.string.mensagem_login)
 
+        intent.extras.getString("data")
+
 
         val botaoLogin = findViewById<Button>(R.id.botao_login)
 
@@ -38,6 +41,13 @@ class LoginActivity : DebugActivity() {
 
         botaoLogin.setOnClickListener {onClickLogin() }
 
+    }
+    fun enviaNotificacao() {
+        // Intent para abrir tela quando clicar na notificação
+        val intent = Intent(this, TelaInicialActivity::class.java)
+
+        // Disparar notificação
+        NotificationUtil.create(this, 1, intent, "LMSApp", "Você logou no sistema")
     }
 
     fun onClickLogin(){
@@ -63,6 +73,7 @@ class LoginActivity : DebugActivity() {
             params.putString("nome", valorUsuario)
 
             intent.putExtras(params)
+            enviaNotificacao()
 
             // fazer a chamada esperando resultado
             startActivityForResult(intent, 1)

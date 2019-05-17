@@ -47,8 +47,13 @@ class TelaInicialActivity : DebugActivity(), NavigationView.OnNavigationItemSele
         configuraMenuLateral()
 
         calendar?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val msg = "" +  dayOfMonth + "/" + (month + 1) + "/" + year
-            Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+            val data = "" +  dayOfMonth + "/" + (month + 1) + "/" + year
+            Toast.makeText(this,data,Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,LoginActivity::class.java)
+            intent.putExtra("data", data)
+            startActivity(intent)
+
+
         }
 
 
